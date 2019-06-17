@@ -373,7 +373,7 @@ public class Attacher implements IAttacher, View.OnTouchListener, OnScaleDragGes
 
     @Override
     public void onScale(float scaleFactor, float focusX, float focusY) {
-        if (getScale() < mMaxScale || scaleFactor < 1.0F) {
+        if ((getScale() < mMaxScale || scaleFactor < 1f) && (getScale() > mMinScale || scaleFactor > 1f)) {
 
             if (mScaleChangeListener != null) {
                 mScaleChangeListener.onScaleChange(scaleFactor, focusX, focusY);
@@ -596,7 +596,7 @@ public class Attacher implements IAttacher, View.OnTouchListener, OnScaleDragGes
         cancelFling();
     }
 
-    private void onMatrixChanged() {
+    public void onMatrixChanged() {
         if (null != mOnMatrixChangedListener) {
             RectF displayRect = getDisplayRect(getDrawMatrix());
             if (null != displayRect) {
